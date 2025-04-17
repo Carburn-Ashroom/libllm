@@ -22,3 +22,6 @@ LLM.exe
 
 # 保护密钥
 main.cpp
+
+# 视频文案
+Draft.txt
