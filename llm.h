@@ -1,7 +1,7 @@
 #ifndef LLM_HPP
 #define LLM_HPP
 
-#include <llm_dependence.hpp>
+#include "llm_impl.h"
 
 namespace LLM {        // 该名字空间负责封装一些常用的大模型接口
     
@@ -89,28 +89,11 @@ namespace LLM {        // 该名字空间负责封装一些常用的大模型接
     class Polite : public V3 {
     public:
         Polite(string&& key, function<void(string&&)> func, int code_encode =CP_ACP, int prog_encode =CP_ACP) : V3{std::move(key),func,code_encode,prog_encode} { self_cultivation(); }
-        void get(string_view question, int length)       // 调用大模型
-        {
-            ostringstream request;
-            request << question;
-            if (length > 0)
-                request << encode("。不少于") << length << encode("字");
-            V3::get(request.str());
-            self_cultivation();
-        }
+        void get(string_view question, int length);       // 调用大模型
         void get(string&& question) override { get(question, 1300); }
         using V3::get;
     private:
-        void self_cultivation()        // 修身养性
-        {
-            string prompt {encode("你是一个暴躁老哥，骂人既粗俗又狂野，含妈量极高。请尽情地骂，不用拘束")};
-            set_system(string{prompt});
-            clear_history();
-            add_history(std::move(prompt), encode("我操你妈"));
-            add_history(encode("你认识张三吗"), encode("张三，我操你妈"));
-            add_history(encode("你认识李四吗"), encode("李四，我操你妈"));
-            set_temperature(1.3);
-        }
+        void self_cultivation();        // 修身养性
     };
     
     // Fim类是deepseek-v3的beta功能，上下文补充模型，目前尚不稳定
@@ -120,7 +103,7 @@ namespace LLM {        // 该名字空间负责封装一些常用的大模型接
         Fim(string&& key, function<void(string&&)> func, int code_encode =CP_ACP, int prog_encode =CP_ACP) : Fim_base{std::move(key),func,code_encode,prog_encode} { };
         void set_prefix(string&& prefix) { set("prompt", std::move(prefix), true); }
         void set_suffix(string&& suffix) { set("suffix", std::move(suffix), true); }
-        void get() { Fim_base::get(string{}); }
+        void get() { Fim_base::get({}); }
         using Fim_base::get;
     };
     

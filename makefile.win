@@ -1,0 +1,44 @@
+# Project: LLM
+# Makefile created by Red Panda C++ 3.4.3279
+
+CXX      = "g++.exe"
+CC       = "gcc.exe"
+WINDRES  = "windres.exe"
+RM       = del /q /f
+CD       = cd /d
+LIBS     = "-Wl,--stack,12582912" "E:/RedPanda/Console/(Control)/Debug/LLM/libcurl/lib/libcurl.lib"
+INCS     = "-IE:/RedPanda/Console/(Control)/Debug/LLM/libcurl/include/curl"
+CXXINCS  = "-IE:/RedPanda/Console/(Control)/Debug/LLM/libcurl/include/curl"
+CXXFLAGS = $(CXXINCS) "-g3" "-pipe" "-Wall" "-D_DEBUG"
+CFLAGS   = $(INCS) "-g3" "-pipe" "-Wall" "-D_DEBUG"
+NASM_FLAGS   =  "-f" "elf64" "-g"
+WINDRESFLAGS = 
+RES      = DeepSeek_private.res
+OBJ      = llm.o llm_impl.o main.o $(RES)
+BIN      = LLM.exe
+LINKOBJ  = "llm.o" "llm_impl.o" "main.o" "DeepSeek_private.res"
+CLEANOBJ = "llm.o" "llm_impl.o" "main.o" "DeepSeek_private.res" "LLM.exe"
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	-$(RM) $(CLEANOBJ) >NUL 2>&1
+
+LLM.exe: $(OBJ)
+
+	$(CXX) $(LINKOBJ) -o "LLM.exe" $(LIBS)
+
+llm.o: llm.cpp llm_impl.h curl.hpp llm.h
+	$(CXX) -c "llm.cpp" -o "llm.o" $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+llm_impl.o: llm_impl.cpp llm_impl.h curl.hpp llm.h
+	$(CXX) -c "llm_impl.cpp" -o "llm_impl.o" $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+main.o: main.cpp llm_impl.h curl.hpp llm.h
+	$(CXX) -c "main.cpp" -o "main.o" $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DeepSeek_private.res: DeepSeek_private.rc 
+	$(WINDRES) -i "DeepSeek_private.rc" --input-format=rc -o "DeepSeek_private.res" -O coff $(WINDRESFLAGS) 
+

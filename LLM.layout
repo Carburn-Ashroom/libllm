@@ -1,0 +1,52 @@
+[
+    {
+        "caretX": 23,
+        "caretY": 21,
+        "filename": "E:/RedPanda/Console/(Control)/Debug/LLM/llm.cpp",
+        "focused": false,
+        "isOpen": true,
+        "left": 0,
+        "order": 3,
+        "top": 0
+    },
+    {
+        "caretX": 48,
+        "caretY": 144,
+        "filename": "E:/RedPanda/Console/(Control)/Debug/LLM/llm_impl.h",
+        "focused": true,
+        "isOpen": true,
+        "left": 0,
+        "order": 2,
+        "top": 4590
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "E:/RedPanda/Console/(Control)/Debug/LLM/curl.hpp",
+        "focused": false,
+        "isOpen": true,
+        "left": 0,
+        "order": 1,
+        "top": 0
+    },
+    {
+        "caretX": 48,
+        "caretY": 96,
+        "filename": "E:/RedPanda/Console/(Control)/Debug/LLM/llm.h",
+        "focused": false,
+        "isOpen": true,
+        "left": 0,
+        "order": 4,
+        "top": 2340
+    },
+    {
+        "caretX": 44,
+        "caretY": 34,
+        "filename": "E:/RedPanda/Console/(Control)/Debug/LLM/main.cpp",
+        "focused": false,
+        "isOpen": true,
+        "left": 0,
+        "order": 0,
+        "top": 630
+    }
+]
